@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looker Embed for Phones</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f1f1f1; /* Optional: Set background color */
+        }
+
+        .embed-container {
+            width: 100%;
+            height: 100vh; /* Make sure the iframe takes the full height of the screen */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .embed-container iframe {
+            width: 390px;
+            height: 900px;
+            border: 0;
+            border-radius: 10px; /* Optional: Add rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="embed-container">
+        <iframe src="https://lookerstudio.google.com/embed/reporting/d45d2334-16b0-4915-a6eb-9b216cded3af/page/p_vt9gu3w7fd"
+            frameborder="0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+    </div>
+</body>
+
+</html>
