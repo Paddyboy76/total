@@ -7,52 +7,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      padding: 20px;
-    }
-    .input-field input[type=text] {
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .input-field label {
-      color: #444;
-    }
-    .btn {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .btn:hover {
-      background-color: #0056b3;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    th, td {
-      padding: 12px 15px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-    }
-    th {
-      background-color: #f0f0f0;
-      font-weight: 500;
-    }
+    /* Your CSS styles here */
   </style>
 </head>
 <body>
@@ -70,7 +25,9 @@
       const staffId = document.getElementById("staffId").value;
       const url = "https://script.google.com/macros/s/AKfycbzqVDqNc2UsG0-Ked6ACuAI0WHDLPikGyMBV4wAMwVIQ0VfPiSKCVFCR_8AXwOeNIYf8Q/exec?staffId=" + staffId;
 
-      fetch(url)
+      fetch(url, {
+        mode: 'cors' // Set mode to 'cors' to enable CORS
+      })
         .then(response => response.json())
         .then(data => populateTable(data))
         .catch(error => console.error(error));
