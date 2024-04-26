@@ -36,8 +36,18 @@
         function displayReport(html) {
             document.getElementById('report').innerHTML = html;
         }
+
+        function loadScript(url, callback) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.onload = callback;
+            script.src = url;
+            document.head.appendChild(script);
+        }
+
+        loadScript("https://script.google.com/macros/s/AKfycbzqVDqNc2UsG0-Ked6ACuAI0WHDLPikGyMBV4wAMwVIQ0VfPiSKCVFCR_8AXwOeNIYf8Q/exec", function() {
+            console.log("Google Apps Script API loaded successfully");
+        });
     </script>
-    <!-- Include the Google Apps Script API -->
-    <script src="https://script.google.com/macros/s/AKfycbzqVDqNc2UsG0-Ked6ACuAI0WHDLPikGyMBV4wAMwVIQ0VfPiSKCVFCR_8AXwOeNIYf8Q/exec" defer></script>
 </body>
 </html>
