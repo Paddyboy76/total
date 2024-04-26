@@ -1,53 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submission Report</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Submission Report</title>
+  <style>
+    /* Add your table styling here */
+  </style>
 </head>
 <body>
-    <h1>Submission Report</h1>
-    <label for="staffId">Enter Staff ID:</label>
-    <input type="text" id="staffId">
-    <button onclick="fetchData()">Get Report</button>
+  <h1>Staff Submission Report</h1>
+  <label for="staffId">Enter Staff ID: </label>
+  <input type="text" id="staffId" name="staffId">
+  <button onclick="getStaffSubmissions()">Search</button>
+  <br><br>
+  <div id="report-table"></div>
+  <script>
+    function getStaffSubmissions() {
+      const staffId = document.getElementById("staffId").value;
+      const url = "https://script.google.com/macros/s/AKfycbzqVDqNc2UsG0-Ked6ACuAI0WHDLPikGyMBV4wAMwVIQ0VfPiSKCVFCR_8AXwOeNIYf8Q/exec?staffId=" + staffId;
 
-    <div id="report"></div>
+      fetch(url)
+        .then(response => response.json())
+        .then(data => populateTable(data))
+        .catch(error => console.error(error));
+    }
 
-    <script>
-        function fetchData() {
-            var staffId = document.getElementById('staffId').value;
-            google.script.run.withSuccessHandler(displayReport).getDataForStaffId(staffId);
-        }
+    function populateTable(data) {
+      const tableBody = document.getElementById("report-table");
+      tableBody.innerHTML = ""; // Clear previous content
 
-        function displayReport(html) {
-            document.getElementById('report').innerHTML = html;
-        }
+      if (data.length === 0) {
+        tableBody.innerHTML = "No submissions found for staff ID: " + staffId;
+        return;
+      }
 
-        function loadScript(url, callback) {
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.onload = callback;
-            script.src = url;
-            document.head.appendChild(script);
-        }
+      const table = document.createElement("table");
+      table.classList.add("responsive-table"); // Add your desired class for responsiveness
 
-        loadScript("https://script.google.com/macros/s/AKfycbzqVDqNc2UsG0-Ked6ACuAI0WHDLPikGyMBV4wAMwVIQ0VfPiSKCVFCR_8AXwOeNIYf8Q/exec", function() {
-            console.log("Google Apps Script API loaded successfully");
-        });
-    </script>
+      const tableHead = document.createElement("thead");
+      const headRow = document.createElement("tr");
+      headRow.appendChild(document.createElement("th")).textContent = "Date";
+      headRow.appendChild(document.createElement("th")).textContent = "Option Submitted";
+      tableHead.appendChild(headRow);
+      table.appendChild(tableHead);
+
+      const tableBodyElement = document.createElement("tbody");
+      data.forEach(row => {
+        const bodyRow = document.createElement("tr");
+        bodyRow.appendChild(document.createElement("td")).textContent = row["ประทับเวลา"];
+        bodyRow.appendChild(document.createElement("td")).textContent = row["เลือกหมวดมิติสุขภาวะ"];
+        tableBodyElement.appendChild(bodyRow);
+      });
+      table.appendChild(tableBodyElement);
+      tableBody.appendChild(table);
+    }
+  </script>
 </body>
 </html>
